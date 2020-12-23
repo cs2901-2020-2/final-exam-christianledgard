@@ -80,7 +80,8 @@ public class Pieza {
 
     public void print(){
         for (int i = 0; i < 3; i++) {
-            logger.info(matrix.get(i).toString());
+            String log = matrix.get(i).toString();
+            logger.info(log);
         }
     }
 
