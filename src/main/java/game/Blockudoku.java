@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Blockudoku {
@@ -9,21 +10,38 @@ public class Blockudoku {
     public static void main(String[] args){
         logger.info("test");
         Tablero tablero = new Tablero();
-        tablero.print();
-
         ArrayList<Pieza> piezas =  new ArrayList<>();
-
         initPiezas(piezas);
+        game(tablero, piezas, true);
+    }
 
+    private static void game(Tablero tablero, ArrayList<Pieza> piezas, boolean test) {
+        logger.info("Bienvenidos al juego");
         while(true){
-            logger.info("Bienvenidos al juego");
-            tablero.ingresarPiezaEnPosicion(piezas.get(0),0,0);
-            logger.info("Puntaje");
-            logger.info(String.valueOf(tablero.getPoints()));
             tablero.print();
-            break;
-        }
+            if (test) break;
 
+            logger.info("Ingrese el número de ficha a insertar");
+            Scanner scan = new Scanner(System.in);
+            int ficha = scan.nextInt();
+            logger.info("Ingrese coodenada X");
+            int x = scan.nextInt();
+            logger.info("Ingrese coodenada Y");
+            int y = scan.nextInt();
+
+            tablero.ingresarPiezaEnPosicion(piezas.get(ficha),x,y);
+
+            logger.info("Su puntaje acutal es ");
+            String s =String.valueOf(tablero.getPoints());
+            logger.info(s);
+
+            if(tablero.isGameOver()){
+                logger.info("--------- GAME OVER ---------");
+                break;
+            }
+
+
+        }
     }
 
     private static void initPiezas(ArrayList<Pieza> piezas) {
@@ -35,11 +53,6 @@ public class Blockudoku {
         piezas.add(new Pieza('f'));
         piezas.add(new Pieza('g'));
         piezas.add(new Pieza('h'));
-
-
-        for (Pieza pieza : piezas){
-            pieza.print();
-        }
     }
 
 }

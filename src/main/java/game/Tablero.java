@@ -20,10 +20,11 @@ public class Tablero {
     }
 
     public void ingresarPiezaEnPosicion(Pieza a, int x, int y){
-        for (int i = x, r = 0; i + x < 3; i++, r++) {
-            for (int j = y, c = 0; j + y < 3; j++, c++) {
+        for (int i = x, r = 0; i < 3 + x ; i++, r++) {
+            for (int j = y, c = 0; j < 3 + y; j++, c++) {
                 ArrayList<ArrayList<Integer>> matrixDeLaPieza = a.getMatrix();
-                this.matrix.get(i).set(j, matrixDeLaPieza.get(r).get(c));
+                if(matrixDeLaPieza.get(r).get(c) != 0)
+                    this.matrix.get(i).set(j, matrixDeLaPieza.get(r).get(c));
             }
         }
     }
@@ -86,6 +87,16 @@ public class Tablero {
             if(contador == 9) columnas += 1;
         }
         return columnas;
+    }
+
+    public boolean isGameOver(){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if(matrix.get(j).get(i) == 0)
+                    return false;
+            }
+        }
+        return true;
     }
 
 

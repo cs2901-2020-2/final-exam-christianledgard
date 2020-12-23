@@ -11,8 +11,7 @@ import java.util.Scanner;
 import java.lang.String;
 import java.util.logging.Logger;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class BlockudokuTest {
 
@@ -27,6 +26,7 @@ public class BlockudokuTest {
         Tablero tablero = new Tablero();
         assertEquals(tablero.getPoints(), 0);
         tablero.print();
+        assertFalse(tablero.isGameOver());
         assertTrue(true, "Tablero Generado sin Inconvenientes");
     }
 
@@ -57,6 +57,15 @@ public class BlockudokuTest {
         tablero.ingresarPiezaEnPosicion(piezas.get(0),0,0);
 
         assertTrue(true, "Tablero Generado sin Inconvenientes");
+    }
+
+    @Test
+    void testTime(){
+        long startTime = System.currentTimeMillis();
+        test0();
+        long endTime = System.currentTimeMillis();
+        long timeElapsed = endTime - startTime;
+        Assert.assertTrue(timeElapsed < 2000);
     }
 
 
